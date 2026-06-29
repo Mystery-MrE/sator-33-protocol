@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SATOR-33 Sovereign Vault // Astro-Riches Engine</title>
+    <title>SATOR-33 Sovereign Vault // Active Retrieval</title>
     <style>
         body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .vault-card { background: #161b22; border: 1px solid #30363d; padding: 30px; border-radius: 12px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        .vault-card { background: #161b22; border: 1px solid #30363d; padding: 30px; border-radius: 12px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); margin-bottom: 50px; }
         h1 { font-size: 24px; margin-bottom: 5px; color: #58a6ff; font-weight: bold; letter-spacing: 1px; }
         .subtitle { font-size: 11px; color: #8b949e; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
         .file-box { border: 2px dashed #30363d; padding: 30px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 20px; display: block; }
@@ -17,8 +17,9 @@
         .astro-field { background: #0d1117; border: 1px solid #30363d; color: #ffffff; padding: 10px; width: 100%; box-sizing: border-box; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 10px; }
         button { background: #238636; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-bottom: 15px; transition: 0.2s; }
         button:hover { background: #2ea043; }
-        .retrieve-section { background: #21262d; border: 1px solid #30363d; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: left; display: none; }
+        .retrieve-section { background: #21262d; border: 1px solid #30363d; padding: 20px; border-radius: 8px; margin-top: 25px; text-align: left; display: none; }
         #status { margin-top: 15px; font-size: 13px; color: #7ee787; font-family: monospace; white-space: pre-wrap; text-align: left; border-left: 2px solid #30363d; padding-left: 10px; min-height: 40px; }
+        .identity-input-field { background: #0d1117 !important; border: 1px solid #58a6ff !important; color: #ffffff !important; padding: 12px !important; width: 100% !important; box-sizing: border-box !important; border-radius: 6px !important; margin-top: 10px !important; margin-bottom: 15px !important; font-family: monospace !important; font-size: 16px !important; display: block !important; visibility: visible !important; }
         .retrieve-btn { background: #1f6feb; }
         .retrieve-btn:hover { background: #388bfd; }
     </style>
@@ -29,7 +30,6 @@
     <h1>SATOR-33 VAULT</h1>
     <div class="subtitle">Astro-Riches Symmetrical Alignment // 1 + 1 = 2</div>
     
-    <!-- Astro-Riches Alignment Ingestion Inputs -->
     <div class="astro-input-group">
         <label>✨ Align Natal Wealth Vector coordinates</label>
         <input type="number" id="ascendant-degree" class="astro-field" placeholder="Ascendant Degree (0-359)" style="display:block;">
@@ -44,10 +44,12 @@
     <button id="process-btn">Lock Matrix with Astro-Riches Key</button>
     <div id="status">System Status: Awaiting Vector Alignment...</div>
 
-    <!-- Active Retrieval Gateway -->
+    <!-- Active Retrieval Gateway UI Adjusted Above Button -->
     <div class="retrieve-section" id="retrieve-panel">
         <b style="color: #58a6ff;">🔑 S33 Cryptographic Retrieval Portal</b>
-        <div style="margin-top: 5px; color: #8b949e; font-size: 12px; margin-bottom: 10px;">The celestial matrix is locked. Enter your identity signature to reverse the vectors and download:</div>
+        <div style="margin-top: 8px; color: #8b949e; font-size: 12px;">The celestial matrix is locked. Enter your identity signature:</div>
+        
+        
         
         <button class="retrieve-btn" id="download-btn">Decrypt & Retrieve File</button>
     </div>
@@ -84,7 +86,6 @@
             return;
         }
 
-        // Concrete Astro-Riches Formula Integration: (Ascendant + Jupiter) / 7
         calculatedAstroKey = ((asc + jup) / 7).toFixed(4);
 
         statusDiv.style.color = "#7ee787";
@@ -104,7 +105,6 @@
         }, 2400);
     });
 
-    // File Retrieval & Decoding Pipeline
     document.getElementById('download-btn').addEventListener('click', () => {
         const identityKey = document.getElementById('identity-input').value.trim();
         const statusDiv = document.getElementById('status');
@@ -135,4 +135,4 @@
 </script>
 
 </body>
-</html>
+</html
