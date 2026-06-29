@@ -38,7 +38,6 @@
         <input type="number" id="jupiter-degree" class="astro-field" placeholder="Jupiter Degree (0-359)" style="display:block; margin-bottom:0;">
     </div>
 
-    <!-- Working Native Mobile Upload Component -->
     <div class="native-upload-container">
         <label>📁 Select Data Payload Asset</label>
         <input type="file" id="file-input" class="native-file-field">
@@ -47,7 +46,6 @@
     <button id="process-btn">Lock Matrix with Astro-Riches Key</button>
     <div id="status">System Status: Awaiting Vector Alignment...</div>
 
-    <!-- Active Monero Cryptocurrency Layer Included -->
     <div class="premium-lock-box" id="payment-panel">
         <b style="color: #ff7b72;">🔒 Unlock Unrestricted Core Storage (1TB)</b>
         <div style="margin-top: 6px; color: #8b949e; font-size: 12px; line-height: 1.4;">Send exactly <b style="color: #ffffff;">0.1 XMR (Monero)</b> to your private, self-sovereign project ledger address to activate premium calculations:</div>
@@ -55,7 +53,6 @@
         <button class="action-btn" id="verify-payment-btn" style="margin-bottom:0; width:100%;">Verify Transaction Matrix</button>
     </div>
 
-    <!-- Retrieval Gateway Layer Included -->
     <div class="retrieve-section" id="retrieve-panel">
         <b style="color: #58a6ff; font-size: 14px;">🔑 S33 Cryptographic Retrieval Portal</b>
         <div style="margin-top: 8px; color: #8b949e; font-size: 12px; line-height: 1.4; margin-bottom: 15px;">The celestial matrix is locked. Tap below to prompt the signature verification overlay.</div>
@@ -69,13 +66,12 @@
     let calculatedAstroKey = 0;
     let isPremiumUnlocked = false; 
 
-    // iOS Safari Memory Alignment Fix Loop
+    // Explicit array targeting index fix applied to e.target.files
     document.getElementById('file-input').addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
-            const file = e.target.files[0]; // Strict array reference fix for webkit storage boundaries
+            const file = e.target.files[0]; // Restored proper index object reference mapping loop
             activeFileName = file.name;
             
-            // Convert file stream immediately to text string parameters to prevent background processor idling
             const reader = new FileReader();
             reader.onload = function(event) {
                 activeFileBlob = event.target.result;
@@ -121,7 +117,6 @@
         }, 2400);
     });
 
-    // Monero verification tracking logic loop
     document.getElementById('verify-payment-btn').addEventListener('click', () => {
         const statusDiv = document.getElementById('status');
         const xmrAddress = document.getElementById('xmr-address').innerText.trim();
@@ -157,6 +152,14 @@
             });
     });
 
-    // Native prompt alert loop bypasses mobile layout clipping
     document.getElementById('download-btn').addEventListener('click', () => {
         const statusDiv = document.getElementById('status');
+        const identityKey = prompt("CRITICAL SECURITY CHALLENGE\nEnter sovereign identity signature phrase to unlock S33 vectors:");
+
+        if (identityKey === null) return; 
+
+        if (identityKey.trim() !== "I AM HIM") {
+            statusDiv.style.color = "#f85149";
+            statusDiv.innerText = "CRITICAL SECURITY REFUSAL: Identity Signature Invalidation.\nMatrix locked. Access Denied.";
+            return;
+        }
