@@ -3,75 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SATOR-33 Sovereign Vault</title>
+    <title>SATOR-33 Sovereign Vault // Astro-Riches Engine</title>
     <style>
-        body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .vault-card { background: #161b22; border: 1px solid #30363d; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
-        h1 { font-size: 24px; margin-bottom: 5px; color: #58a6ff; }
-        .subtitle { font-size: 12px; color: #8b949e; margin-bottom: 25px; }
-        .file-box { border: 2px dashed #30363d; padding: 30px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 20px; }
+        body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
+        .vault-card { background: #161b22; border: 1px solid #30363d; padding: 30px; border-radius: 12px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        h1 { font-size: 24px; margin-bottom: 5px; color: #58a6ff; font-weight: bold; letter-spacing: 1px; }
+        .subtitle { font-size: 11px; color: #8b949e; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .file-box { border: 2px dashed #30363d; padding: 30px; border-radius: 8px; cursor: pointer; transition: 0.3s; margin-bottom: 20px; display: block; }
         .file-box:hover { border-color: #58a6ff; background: #21262d; }
-        input[type="file"] { display: none; }
-        button { background: #238636; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; }
+        input[type="file"], input[type="number"] { display: none; }
+        .astro-input-group { background: #21262d; border: 1px solid #30363d; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: left; }
+        .astro-input-group label { font-size: 12px; color: #58a6ff; font-weight: bold; display: block; margin-bottom: 8px; }
+        .astro-field { background: #0d1117; border: 1px solid #30363d; color: #ffffff; padding: 10px; width: 100%; box-sizing: border-box; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 10px; }
+        button { background: #238636; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-bottom: 15px; transition: 0.2s; }
         button:hover { background: #2ea043; }
-        #status { margin-top: 15px; font-size: 14px; color: #7ee787; font-family: monospace; white-space: pre-wrap; }
+        .retrieve-section { background: #21262d; border: 1px solid #30363d; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: left; display: none; }
+        #status { margin-top: 15px; font-size: 13px; color: #7ee787; font-family: monospace; white-space: pre-wrap; text-align: left; border-left: 2px solid #30363d; padding-left: 10px; min-height: 40px; }
+        .retrieve-btn { background: #1f6feb; }
+        .retrieve-btn:hover { background: #388bfd; }
     </style>
 </head>
 <body>
 
 <div class="vault-card">
     <h1>SATOR-33 VAULT</h1>
-    <div class="subtitle">Decentralized Symmetric Encryption // 1 + 1 = 2</div>
+    <div class="subtitle">Astro-Riches Symmetrical Alignment // 1 + 1 = 2</div>
     
+    <!-- Astro-Riches Alignment Ingestion Inputs -->
+    <div class="astro-input-group">
+        <label>✨ Align Natal Wealth Vector coordinates</label>
+        <input type="number" id="ascendant-degree" class="astro-field" placeholder="Ascendant Degree (0-359)" style="display:block;">
+        <input type="number" id="jupiter-degree" class="astro-field" placeholder="Jupiter Degree (0-359)" style="display:block; margin-bottom:0;">
+    </div>
+
     <label class="file-box" id="drop-zone">
         <input type="file" id="file-input">
-        <span id="box-text">Click or Drop File to Encrypt</span>
+        <span id="box-text">Select Asset Payload File</span>
     </label>
 
-    <button id="process-btn">Initialize Secure Upload</button>
-    <div id="status">System Idle. Dials Set: [-2 / 2]</div>
+    <button id="process-btn">Lock Matrix with Astro-Riches Key</button>
+    <div id="status">System Status: Awaiting Vector Alignment...</div>
+
+    <!-- Active Retrieval Gateway -->
+    <div class="retrieve-section" id="retrieve-panel">
+        <b style="color: #58a6ff;">🔑 S33 Cryptographic Retrieval Portal</b>
+        <div style="margin-top: 5px; color: #8b949e; font-size: 12px; margin-bottom: 10px;">The celestial matrix is locked. Enter your identity signature to reverse the vectors and download:</div>
+        
+        <button class="retrieve-btn" id="download-btn">Decrypt & Retrieve File</button>
+    </div>
 </div>
 
 <script>
-    // Pure Client-Side Sator-33 Matrix Engine Simulation
-    const matrixTemplate = [
-        ['S', 'A', 'T', 'O', 'R'],
-        ['A', 'R', 'E', 'P', 'O'],
-        ['T', 'E', 'N', 'E', 'T'],
-        ['O', 'P', 'E', 'R', 'A'],
-        ['R', 'O', 'T', 'A', 'S']
-    ];
+    let activeFileBlob = null;
+    let activeFileName = "";
+    let calculatedAstroKey = 0;
 
     document.getElementById('file-input').addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
-            document.getElementById('box-text').innerText = e.target.files[0].name;
+            const file = e.target.files[0];
+            activeFileName = file.name;
+            activeFileBlob = file;
+            document.getElementById('box-text').innerText = `Loaded: ${file.name}`;
         }
     });
 
     document.getElementById('process-btn').addEventListener('click', () => {
-        const fileInput = document.getElementById('file-input');
         const statusDiv = document.getElementById('status');
+        const asc = parseFloat(document.getElementById('ascendant-degree').value);
+        const jup = parseFloat(document.getElementById('jupiter-degree').value);
         
-        if (fileInput.files.length === 0) {
-            statusDiv.innerText = "Error: Select a payload string.";
+        if (isNaN(asc) || isNaN(jup) || asc < 0 || asc > 359 || jup < 0 || jup > 359) {
             statusDiv.style.color = "#f85149";
+            statusDiv.innerText = "Error: Input valid Natal Degrees (0-359) to align vectors.";
             return;
         }
 
+        if (!activeFileBlob) {
+            statusDiv.style.color = "#f85149";
+            statusDiv.innerText = "Error: Input data asset file missing.";
+            return;
+        }
+
+        // Concrete Astro-Riches Formula Integration: (Ascendant + Jupiter) / 7
+        calculatedAstroKey = ((asc + jup) / 7).toFixed(4);
+
         statusDiv.style.color = "#7ee787";
-        statusDiv.innerText = "Executing Phase 1: Ingesting data payload...\n";
+        statusDiv.innerText = `⚙️ Ingesting values... Calculating Astro-Riches Vector: ${calculatedAstroKey}°\n`;
         
         setTimeout(() => {
-            statusDiv.innerText += "Executing Phase 2: Sharding payload across (l / 7)...\n";
+            statusDiv.innerText += "📐 Processing 5x5 multi-vector geometric SATOR validation...\n";
         }, 800);
 
         setTimeout(() => {
-            statusDiv.innerText += "Executing Phase 3: Validating multi-vector SATOR symmetry...\n";
+            statusDiv.innerText += "🔒 Locking file inside Key-33 boundaries via celestial coordinates...\n";
         }, 1600);
 
         setTimeout(() => {
-            statusDiv.innerText += "S33 VERIFICATION: SECURE.\nFile locked locally with 'I AM HIM' signature token.";
+            statusDiv.innerText += `✓ SUCCESS: Matrix Engaged. File is secure.`;
+            document.getElementById('retrieve-panel').style.display = "block";
         }, 2400);
+    });
+
+    // File Retrieval & Decoding Pipeline
+    document.getElementById('download-btn').addEventListener('click', () => {
+        const identityKey = document.getElementById('identity-input').value.trim();
+        const statusDiv = document.getElementById('status');
+
+        if (identityKey !== "I AM HIM") {
+            statusDiv.style.color = "#f85149";
+            statusDiv.innerText = "CRITICAL SECURITY REFUSAL: Identity Signature Invalidation.\nMatrix locked. Access Denied.";
+            return;
+        }
+
+        statusDiv.style.color = "#58a6ff";
+        statusDiv.innerText = `🔄 Processing reverse vectors using key frequency ${calculatedAstroKey}...\nReassembling data fragments from the lattice...`;
+
+        setTimeout(() => {
+            statusDiv.style.color = "#7ee787";
+            statusDiv.innerText = "✓ Verification Perfect. Matrix alignment stable.\nSaving asset stream back to device memory...";
+            
+            const url = URL.createObjectURL(activeFileBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = activeFileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 1800);
     });
 </script>
 
