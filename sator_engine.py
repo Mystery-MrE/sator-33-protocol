@@ -1,4 +1,4 @@
-    import numpy as np
+import numpy as np
 
 class SatorEngine:
     def __init__(self):
@@ -15,22 +15,17 @@ class SatorEngine:
     def verify_symmetry(self, test_matrix):
         """
         Executes the S33 multi-directional verification check.
-        Checks if Forward == Reverse and Down == Up across the 4 axes.
+        Verifies that rows equal columns, and the matrix equals its full rotation.
         """
-        # Horizontal-Forward vs Horizontal-Reverse
-        horiz_forward = test_matrix
-        horiz_reverse = np.fliplr(test_matrix)
+        # 1. Transpose Check: Rows must exactly match columns (A == A.T)
+        is_transposed_equal = np.array_equal(test_matrix, test_matrix.T)
         
-        # Vertical-Down vs Vertical-Up
-        vert_down = test_matrix
-        vert_up = np.flipud(test_matrix)
+        # 2. Rotational Palindrome Check: Reading backwards/upside down must match (A == A rotated 180)
+        # np.rot90(matrix, 2) flips both horizontally and vertically
+        is_rotational_equal = np.array_equal(test_matrix, np.rot90(test_matrix, 2))
         
-        # Binary Truth Check: 1 + 1 = 2
-        horizontal_aligned = np.array_equal(horiz_forward, horiz_reverse[::-1, ::-1])
-        vertical_aligned = np.array_equal(vert_down, vert_up[::-1, ::-1])
-        
-        if horizontal_aligned and vertical_aligned:
-            return True, "Symmetry Verified: 1 + 1 = 2. State is Secure."
+        if is_transposed_equal and is_rotational_equal:
+            return True, "Symmetry Verified: State is Secure."
         else:
             return False, "CRITICAL ERROR: Symmetrical Matrix Fractured. Unauthorized Mutation Detected."
 
@@ -50,7 +45,8 @@ if __name__ == "__main__":
     tampered_matrix = engine.matrix.copy()
     tampered_matrix[1, 1] = 'X'  # Injecting an unexpected variant into the grid
     
-    print("\nWarning: Hostile Payload Injected into Matrix at:")
+    print("\nWarning: Hostile Payload Injected into Matrix:")
     print(tampered_matrix)
     
     is_valid_malicious, message_malicious = engine.verify_symmetry(tampered_matrix)
+    print(f"\n[Test 2 Run]: {message_malicious}")
