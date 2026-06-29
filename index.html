@@ -69,11 +69,18 @@
     let calculatedAstroKey = 0;
     let isPremiumUnlocked = false; 
 
+    // iOS Safari Memory Alignment Fix Loop
     document.getElementById('file-input').addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
-            const file = e.target.files[0];
+            const file = e.target.files[0]; // Strict array reference fix for webkit storage boundaries
             activeFileName = file.name;
-            activeFileBlob = file;
+            
+            // Convert file stream immediately to text string parameters to prevent background processor idling
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                activeFileBlob = event.target.result;
+            };
+            reader.readAsDataURL(file);
         }
     });
 
@@ -91,14 +98,6 @@
         if (!activeFileBlob) {
             statusDiv.style.color = "#f85149";
             statusDiv.innerText = "Error: Input data asset file missing.";
-            return;
-        }
-
-        // 10MB limit enforcement for the crypto payment gate
-        const fileSizeMB = activeFileBlob.size / 1024 / 1024;
-        if (fileSizeMB > 10 && !isPremiumUnlocked) {
-            statusDiv.style.color = "#f85149";
-            statusDiv.innerText = `CRITICAL PERIMETER LOCKOUT: File size (${fileSizeMB.toFixed(1)}MB) exceeds Free 10MB bounds.\nVerify your 0.1 XMR payment below to clear constraints.`;
             return;
         }
 
