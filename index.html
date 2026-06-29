@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SATOR-33 Sovereign Vault // Active Retrieval</title>
+    <title>SATOR-33 Sovereign Vault // Native Gateway</title>
     <style>
         body { background-color: #0d1117; color: #c9d1d9; font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
         .vault-card { background: #161b22; border: 1px solid #30363d; padding: 30px; border-radius: 12px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 8px 24px rgba(0,0,0,0.5); margin-bottom: 60px; }
@@ -17,14 +17,9 @@
         .astro-field { background: #0d1117; border: 1px solid #30363d; color: #ffffff; padding: 10px; width: 100%; box-sizing: border-box; border-radius: 6px; font-family: monospace; font-size: 14px; margin-bottom: 10px; }
         button { background: #238636; color: white; border: none; padding: 12px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%; font-size: 16px; margin-bottom: 15px; transition: 0.2s; }
         button:hover { background: #2ea043; }
-        
-        /* Expanded Mobile Retrieval Container Layout */
-        .retrieve-section { background: #21262d; border: 1px solid #30363d; padding: 35px 25px !important; border-radius: 8px; margin-top: 30px !important; text-align: left; display: none; min-height: 180px !important; }
+        .retrieve-section { background: #21262d; border: 1px solid #30363d; padding: 25px; border-radius: 8px; margin-top: 30px; text-align: left; display: none; }
         #status { margin-top: 15px; font-size: 13px; color: #7ee787; font-family: monospace; white-space: pre-wrap; text-align: left; border-left: 2px solid #30363d; padding-left: 10px; min-height: 40px; }
-        
-        .field-label { color: #58a6ff; font-size: 12px; font-weight: bold; display: block; margin-bottom: 6px; margin-top: 12px; text-transform: uppercase; }
-        .identity-input-field { background: #0d1117 !important; border: 1px solid #58a6ff !important; color: #ffffff !important; padding: 14px !important; width: 100% !important; box-sizing: border-box !important; border-radius: 6px !important; margin-bottom: 20px !important; font-family: monospace !important; font-size: 16px !important; display: block !important; }
-        .retrieve-btn { background: #1f6feb; }
+        .retrieve-btn { background: #1f6feb; margin-bottom: 0; }
         .retrieve-btn:hover { background: #388bfd; }
     </style>
 </head>
@@ -48,13 +43,10 @@
     <button id="process-btn">Lock Matrix with Astro-Riches Key</button>
     <div id="status">System Status: Awaiting Vector Alignment...</div>
 
-    <!-- Heavily Spaced and Padded Active Retrieval Gateway Interface -->
+    <!-- Clean, Streamlined Panel (No static input to clip or hide) -->
     <div class="retrieve-section" id="retrieve-panel">
         <b style="color: #58a6ff; font-size: 14px;">🔑 S33 Cryptographic Retrieval Portal</b>
-        <div style="margin-top: 8px; color: #8b949e; font-size: 12px; line-height: 1.4;">The celestial matrix is locked. Reversing vectors requires identity phrase clearance.</div>
-        
-        <label class="field-label">Verification Key</label>
-        
+        <div style="margin-top: 8px; color: #8b949e; font-size: 12px; line-height: 1.4; margin-bottom: 15px;">The celestial matrix is locked. Tap below to prompt the signature verification overlay.</div>
         
         <button class="retrieve-btn" id="download-btn">Decrypt & Retrieve File</button>
     </div>
@@ -107,16 +99,20 @@
         setTimeout(() => {
             statusDiv.innerText += `✓ SUCCESS: Matrix Engaged. File is secure.`;
             document.getElementById('retrieve-panel').style.display = "block";
-            // Forces mobile screen view to pull upward dynamically
             document.getElementById('retrieve-panel').scrollIntoView({ behavior: 'smooth' });
         }, 2400);
     });
 
+    // Native Bypass Popup Gateway Triggers on Click
     document.getElementById('download-btn').addEventListener('click', () => {
-        const identityKey = document.getElementById('identity-input').value.trim();
         const statusDiv = document.getElementById('status');
+        
+        // Native iPhone Input Prompt Overlay
+        const identityKey = prompt("CRITICAL SECURITY CHALLENGE\nEnter sovereign identity signature phrase to unlock S33 vectors:");
 
-        if (identityKey !== "I AM HIM") {
+        if (identityKey === null) return; // User pressed cancel
+
+        if (identityKey.trim() !== "I AM HIM") {
             statusDiv.style.color = "#f85149";
             statusDiv.innerText = "CRITICAL SECURITY REFUSAL: Identity Signature Invalidation.\nMatrix locked. Access Denied.";
             return;
