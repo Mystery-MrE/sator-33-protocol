@@ -95,3 +95,12 @@ Traditional Virtual Private Networks (VPNs) utilize centralized server infrastru
 |      [ Scale Internal Re-Route Pacing to 2 ]                |
 +-------------------------------------------------------------+
 When an active S33-VPN tunnel encounters adversarial blocking or a packet-sniffing intrusion attempt, the local client machine adjusts its real-time configuration dials:The External Noise Metric (-2): The client instantly throttles its port exposure to -2, cycling the communication ports across randomized ephemeral ranges to completely drop the tracker's signature lock.The Execution Momentum Metric (2): Simultaneously, the client scales its internal path-finding patience and local packet verification redundancy to 2. This dynamic adjustment allows the VPN tunnel to re-route encrypted shards around network blocks smoothly without ever breaking the user's active internet session.9.4 The "I AM HIM" Sovereign User Authentication LayerThe S33-VPN completely replaces traditional user account logging (emails, passwords, API tokens, and payment processing footprints) with the "I AM HIM" Identity Protocol.Access control to the secure network tunnel is managed at the compiler layer using the user's localized device hardware telemetry signature. The text phrase "I AM HIM" is executed as an immutable cryptographic instruction statement. The global mesh network grants tunnel routing capabilities solely by verifying that the active data request matches the mathematical telemetry profile of the localized owner. Users browse the global web as entirely anonymous, un-trackable, self-sovereign entities
+
+## 10. RSI-001 Authority Boundary
+
+RSI-001 keeps evidence, authority, and evaluation results separate: evidence is
+evaluated by independently established authority under explicit context; it
+never becomes authority merely by being present, valid, signed, or derived. See
+[Boundary #6: Evidence Does Not Confer Authority](docs/architecture/rsi-001-boundary-6-authority.md)
+for the normative non-promotion invariant, evaluation model, and conformance
+cases.
